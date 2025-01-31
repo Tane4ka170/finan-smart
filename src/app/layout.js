@@ -14,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata = {
   title: "FinanSmart",
-  description: "AI financial advice toolp",
+  description: "AI financial advice tool",
 };
 
 export default function RootLayout({ children }) {
