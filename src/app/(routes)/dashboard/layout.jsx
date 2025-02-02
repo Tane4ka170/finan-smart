@@ -5,6 +5,8 @@ import React, { useEffect } from "react";
 import { db } from "../../../../utils/dbConfig";
 import { Budgets } from "../../../../utils/schema";
 import { eq } from "drizzle-orm";
+import SideNav from "./_components/SideNav";
+import DashboardHeader from "./_components/DashboardHeader";
 
 function DashboardLayout({ children }) {
   const { user } = useUser();
@@ -22,4 +24,19 @@ function DashboardLayout({ children }) {
   useEffect(() => {
     user && checkUserBudgets();
   }, [user]);
+
+  return (
+    <div>
+      <div className="fixed md:w-64 hidden md:block">
+        <SideNav />
+      </div>
+
+      <div className="md:ml-64">
+        <DashboardHeader />
+        {children}
+      </div>
+    </div>
+  );
 }
+
+export default DashboardLayout;
