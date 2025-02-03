@@ -13,12 +13,40 @@ function CardInfo({ budgetList, incomeList }) {
   }, [budgetList, incomeList]);
 
   useEffect(() => {
-    first;
+    // if (totalBudget > 0 || totalIncome > 0 || totalSpend > 0) {
+    //   const fetchFinancialAdvise = async () => {
+    //     const advise = await getFinancialAdvise(
+    //       totalBudget,
+    //       totalIncome,
+    //       totalSpend
+    //     );
+    //   };
+    //   setFinancialAdvise();
+    // }
+    // fetchFinancialAdvise();
+  }, [totalBudget, totalIncome, totalSpend]);
 
-    return () => {
-      second;
-    };
-  }, [third]);
+  const calculateInfo = () => {
+    let totalBudget_ = 0;
+    let totalIncome_ = 0;
+    let totalSpend_ = 0;
+    budgetList.forEach((element) => {
+      totalBudget_ = totalBudget_ + Number(element.amount);
+      totalSpend_ = totalSpend_ + element.totalSpend;
+    });
+    incomeList.forEach((element) => {
+      totalIncome_ = totalIncome_ + element.totalAmount;
+    });
+    setTotalBudget(totalBudget_);
+    setTotalSpend(totalSpend_);
+    setTotalIncome(totalIncome_);
+  };
+
+    return <div>{budgetList.length > 0 ? (<div>
+        <div className="p-7 border mt-4 rounded-2xl flex items-center justify-between">
+            <div></div>
+      </div>
+  </div>) : ()}</div>;
 }
 
 export default CardInfo;
