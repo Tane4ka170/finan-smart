@@ -5,7 +5,27 @@ const openai = new OpenAI({
   dangerouslyAllowBrowser: true,
 });
 
-const getFinancialAdvise = async (totalBudget, totalIncome, totalSpend) => {
+export const getFinancialAdvise = async (
+  totalBudget,
+  totalIncome,
+  totalSpend
+) => {
   try {
-  } catch (error) {}
+    const userPrompt = ` Given the financial data:
+      - Total Budget: ${totalBudget} USD 
+      - Expenses: ${totalSpend} USD 
+      - Incomes: ${totalIncome} USD
+      Provide two sentences of personalized financial advice to help optimize spending and savings`;
+
+    const chatCompletion = await openai.chat.completions.create({
+      model: "gpt-4o",
+      messages: [{ role: "user", content: userPrompt }],
+    });
+
+    const advice = chatCompletion.choices[0].message.content;
+
+    return advice;
+  } catch (error) {
+    return error;
+  }
 };
